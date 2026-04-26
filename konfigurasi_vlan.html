@@ -1,108 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  
-  
-  
-  <style>
-    * {
-      box-sizing: border-box;
-      max-width: 100%;
-    }
-    html, body {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    }
-    body {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 15px; /* Mengikuti ukuran materi_vlan.html */
-      padding: 15px;
-      line-height: 1.7;
-      color: #000;
-      background-color: #fff;
-    }
-    h2 {
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 20px;
-      margin-bottom: 6px;
-      text-align: left;
-    }
-    h3 {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 16px;
-      margin-bottom: 4px;
-      text-align: left;
-    }
-    h4 {
-      font-size: 15px;
-      font-weight: bold;
-      margin-top: 12px;
-      margin-bottom: 4px;
-      margin-left: 16px;
-      text-align: left;
-    }
-    p {
-      margin: 10px 0;
-      text-align: justify;
-      text-indent: 2em;
-      word-wrap: break-word;
-    }
-    img {
-      display: block;
-      margin: 20px auto;
-      max-width: 100% !important;
-      height: auto !important;
-      border: 1px solid #ddd;
-    }
-    .caption {
-      text-align: center;
-      font-size: 13px;
-      font-style: italic;
-      text-indent: 0;
-      margin-top: -10px;
-    }
-    pre {
-      background-color: #f8f9fa;
-      padding: 12px;
-      border: 1px solid #ddd;
-      font-family: "Courier New", Courier, monospace;
-      font-size: 13px;
-      white-space: pre-wrap;
-      word-break: break-all;
-      overflow-x: auto;
-    }
-    .sub { margin-left: 20px; }
-    .noindent { text-indent: 0; }
-  </style>
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Konfigurasi VLAN - Switch Cisco, Router, dan Mikrotik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef2f7;
+            color: #1a2c3e;
+            line-height: 1.55;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            padding: 45px 50px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin: 35px 0 18px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #cbd5e1;
+            color: #0f4c5f;
+        }
+        h3 {
+            font-size: 1.4rem;
+            margin: 28px 0 12px 0;
+            color: #1e6f5c;
+        }
+        h4 {
+            font-size: 1.2rem;
+            margin: 22px 0 10px 20px;
+            color: #2c6e9e;
+            font-weight: 600;
+        }
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        ul, ol {
+            margin: 0.75rem 0 1rem 1.8rem;
+        }
+        li {
+            margin: 0.45rem 0;
+            text-align: justify;
+        }
+        figure {
+            margin: 30px 0;
+            text-align: center;
+            background: #fafcff;
+            border-radius: 24px;
+            padding: 12px;
+            border: 1px solid #dce7f2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: inline-block;
+        }
+        figcaption {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: #2c6e9e;
+            font-style: italic;
+        }
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .sub {
+            margin-left: 20px;
+        }
+        .noindent {
+            text-indent: 0;
+        }
+        hr {
+            margin: 35px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #bfd9f0, transparent);
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 24px 20px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            h4 {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h2>Konfigurasi VLAN</h2>
 
-  <h2>Konfigurasi VLAN</h2>
+    <h3>1. Percobaan VLAN dengan <i>Switch</i> Cisco Catalyst</h3>
+    <p>Langkah-langkah untuk mengkonfigurasi VLAN pada <i>Switch</i> Cisco Catalyst antara lain:</p>
+    <p>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i> dan selanjutnya memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. Untuk mengaktifkan <i>Switch</i> menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i>.</p>
 
-  <h3>1. Percobaan VLAN dengan <i>Switch</i> Cisco Catalyst</h3>
-  <p>Langkah-langkah untuk mengkonfigurasi VLAN pada <i>Switch</i> Cisco Catalyst antara lain:</p>
-  <p>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i> dan selanjutnya memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. Untuk mengaktifkan <i>Switch</i> menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i>.</p>
+    <figure>
+        <img src="Gambar CLI Switch.png" alt="Tampilan CLI Switch">
+        <figcaption>Gambar 1 - Tampilan CLI Switch</figcaption>
+    </figure>
 
-  <img src="Gambar CLI Switch.png" alt="Gambar CLI Switch">
-  <p class="caption">Gambar 1 - Tampilan CLI Switch</p>
+    <h4>a. Membuat VLAN</h4>
+    <p class="sub">Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 2.</p>
 
-  <h4>a. Membuat VLAN</h4>
-  <p class="sub">Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 2.</p>
+    <figure>
+        <img src="Gambar Topologi VLAN.png" alt="Topologi VLAN">
+        <figcaption>Gambar 2 - Topologi VLAN</figcaption>
+    </figure>
 
-  <img src="Gambar Topologi VLAN.png" alt="Gambar Topologi VLAN">
-  <p class="caption">Gambar 2 - Topologi VLAN</p>
-
-  <p class="noindent">Perintah yang digunakan untuk membuat VLAN antara lain:</p>
-<pre>Switch>enable
+    <p class="noindent">Perintah yang digunakan untuk membuat VLAN antara lain:</p>
+    <pre>Switch>enable
 Switch#configure terminal
 (untuk masuk ke sub menu konfigurasi)
 Switch(config)#vlan 3
@@ -118,81 +154,95 @@ Switch(config-vlan)#name MAHASISWA
 Switch(config-vlan)#exit
 Switch(config)#</pre>
 
-  <img src="Gambar membuat VLAN 3.png" alt="Gambar membuat VLAN 3">
-  <p class="caption">Gambar 3 - Percobaan membuat VLAN 3 dengan nama KANTOR</p>
+    <figure>
+        <img src="Gambar membuat VLAN 3.png" alt="Membuat VLAN 3">
+        <figcaption>Gambar 3 - Percobaan membuat VLAN 3 dengan nama KANTOR</figcaption>
+    </figure>
 
-  <img src="Gambar membuat VLAN 2.png" alt="Gambar membuat VLAN 2">
-  <p class="caption">Gambar 4 - Percobaan membuat VLAN 2 dengan nama MAHASISWA</p>
+    <figure>
+        <img src="Gambar membuat VLAN 2.png" alt="Membuat VLAN 2">
+        <figcaption>Gambar 4 - Percobaan membuat VLAN 2 dengan nama MAHASISWA</figcaption>
+    </figure>
 
-  <h4>b. Memasukkan <i>Port</i> menjadi Anggota Suatu VLAN</h4>
-  <p class="sub">Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
-  <p class="noindent">Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
-<pre>Switch(config)#interface fastEthernet 0/1
+    <h4>b. Memasukkan <i>Port</i> menjadi Anggota Suatu VLAN</h4>
+    <p class="sub">Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
+    <p class="noindent">Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
+    <pre>Switch(config)#interface fastEthernet 0/1
 Switch(config-if)#switchport mode access
 Switch(config-if)#switchport access vlan 10
 Switch(config-if)#exit</pre>
 
-  <img src="Gambar memasukan Port ke VLAN.png" alt="Gambar memasukkan port ke VLAN">
-  <p class="caption">Gambar 5 - Memasukkan fastethernet 0/1 menjadi anggota VLAN 3</p>
+    <figure>
+        <img src="Gambar memasukan Port ke VLAN.png" alt="Memasukkan port ke VLAN">
+        <figcaption>Gambar 5 - Memasukkan fastethernet 0/1 menjadi anggota VLAN 3</figcaption>
+    </figure>
 
-  <p class="sub">Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i>.</p>
-  <p class="noindent">Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
-<pre>Switch(config)#interface range fa0/1 - fa0/10
+    <p class="sub">Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i>.</p>
+    <p class="noindent">Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
+    <pre>Switch(config)#interface range fa0/1 - fa0/10
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 3</pre>
 
-  <p class="noindent">Memasukkan <i>port</i> Fa0/11 sampai Fa0/20 menjadi anggota VLAN 2:</p>
-<pre>Switch(config)#interface range fa0/11 - fa0/20
+    <p class="noindent">Memasukkan <i>port</i> Fa0/11 sampai Fa0/20 menjadi anggota VLAN 2:</p>
+    <pre>Switch(config)#interface range fa0/11 - fa0/20
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 2</pre>
 
-  <h4>c. Melihat Hasil VLAN</h4>
-  <p class="noindent">Dengan <i>show</i> VLAN:</p>
-<pre>Switch:#show vlan</pre>
+    <h4>c. Melihat Hasil VLAN</h4>
+    <p class="noindent">Dengan <i>show</i> VLAN:</p>
+    <pre>Switch:#show vlan</pre>
 
-  <img src="Gambar show vlan.png" alt="Gambar show vlan">
-  <p class="caption">Gambar 6 - Hasil show vlan</p>
+    <figure>
+        <img src="Gambar show vlan.png" alt="Hasil show vlan">
+        <figcaption>Gambar 6 - Hasil show vlan</figcaption>
+    </figure>
 
-  <p class="noindent">Dengan <i>show vlan brief</i>:</p>
-<pre>Switch:#show vlan brief</pre>
+    <p class="noindent">Dengan <i>show vlan brief</i>:</p>
+    <pre>Switch:#show vlan brief</pre>
 
-  <img src="Gambar show vlan brief.png" alt="Gambar show vlan brief">
-  <p class="caption">Gambar 7 - Hasil show vlan brief</p>
+    <figure>
+        <img src="Gambar show vlan brief.png" alt="Hasil show vlan brief">
+        <figcaption>Gambar 7 - Hasil show vlan brief</figcaption>
+    </figure>
 
-  <h4>d. Menghapus VLAN</h4>
-  <p class="sub">Jika akan menghapus sebuah VLAN, dapat menggunakan perintah <i>"no vlan IdVlan"</i>. Sebagai contoh, perintah untuk menghapus VLAN 2:</p>
-<pre>Switch#configure terminal
+    <h4>d. Menghapus VLAN</h4>
+    <p class="sub">Jika akan menghapus sebuah VLAN, dapat menggunakan perintah <i>"no vlan IdVlan"</i>. Sebagai contoh, perintah untuk menghapus VLAN 2:</p>
+    <pre>Switch#configure terminal
 Switch(config)#no vlan 2</pre>
-  <p class="sub">Maka saat dilihat dengan <i>show vlan brief</i>, VLAN 2 tidak ada pada tampilan seperti pada Gambar 8.</p>
+    <p class="sub">Maka saat dilihat dengan <i>show vlan brief</i>, VLAN 2 tidak ada pada tampilan seperti pada Gambar 8.</p>
 
-  <img src="Gambar setelah hapus VLAN.png" alt="Gambar setelah hapus VLAN">
-  <p class="caption">Gambar 8 - Tampilan setelah VLAN 2 dihapus</p>
+    <figure>
+        <img src="Gambar setelah hapus VLAN.png" alt="Setelah VLAN 2 dihapus">
+        <figcaption>Gambar 8 - Tampilan setelah VLAN 2 dihapus</figcaption>
+    </figure>
 
-  <h3>2. Percobaan VLAN dengan <i>Switch</i> dan <i>Router</i> Cisco Catalyst</h3>
-  <p>Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 9.</p>
+    <h3>2. Percobaan VLAN dengan <i>Switch</i> dan <i>Router</i> Cisco Catalyst</h3>
+    <p>Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 9.</p>
 
-  <img src="Gambar VLAN dengan Router.png" alt="Gambar VLAN dengan Router">
-  <p class="caption">Gambar 9 - VLAN dengan Router</p>
+    <figure>
+        <img src="Gambar VLAN dengan Router.png" alt="VLAN dengan Router">
+        <figcaption>Gambar 9 - VLAN dengan Router</figcaption>
+    </figure>
 
-  <h4>a. Merubah IP di PC dan Tambahkan <i>Gateway</i></h4>
-  <p class="noindent">PC A:</p>
-<pre># ifconfig eth0 192.168.1.2 netmask 255.255.255.0
+    <h4>a. Merubah IP di PC dan Tambahkan <i>Gateway</i></h4>
+    <p class="noindent">PC A:</p>
+    <pre># ifconfig eth0 192.168.1.2 netmask 255.255.255.0
 # route add default gw 192.168.1.1</pre>
-  <p class="noindent">PC B:</p>
-<pre># ifconfig eth0 192.168.2.2 netmask 255.255.255.0
+    <p class="noindent">PC B:</p>
+    <pre># ifconfig eth0 192.168.2.2 netmask 255.255.255.0
 # route add default gw 192.168.2.1</pre>
-  <p class="sub">Melakukan tes koneksi antara PC A dan PC B, catat hasilnya.</p>
+    <p class="sub">Melakukan tes koneksi antara PC A dan PC B, catat hasilnya.</p>
 
-  <h4>b. Menambahkan <i>Setting</i> di <i>Switch</i> untuk Kabel yang Terhubung ke <i>Router</i> (<i>Trunk</i>)</h4>
-<pre>Switch#conf t
+    <h4>b. Menambahkan <i>Setting</i> di <i>Switch</i> untuk Kabel yang Terhubung ke <i>Router</i> (<i>Trunk</i>)</h4>
+    <pre>Switch#conf t
 Switch(config)#interface fastEthernet 0/4
 Switch(config-if)#switchport mode trunk
 Switch(config-if)#exit
 Switch(config)#</pre>
 
-  <h4>c. <i>Setting Router</i> untuk Interkoneksi Antar VLAN</h4>
-  <p class="noindent">Konfigurasi pada satu <i>interface</i> di <i>Router</i>:</p>
-<pre>Continue with configuration dialog? [yes/no]: no
+    <h4>c. <i>Setting Router</i> untuk Interkoneksi Antar VLAN</h4>
+    <p class="noindent">Konfigurasi pada satu <i>interface</i> di <i>Router</i>:</p>
+    <pre>Continue with configuration dialog? [yes/no]: no
 Press RETURN to get started!
 Router>enable
 Router#conf t
@@ -200,8 +250,8 @@ Router(config)#interface fastEthernet 0/0
 Router(config-if)#no shutdown
 Router(config-if)#exit</pre>
 
-  <p class="sub">Penambahan <i>sub-interface</i> disesuaikan dengan banyaknya VLAN yang akan ditangani. Berhubung pada Gambar 9 hanya ada 2 VLAN, maka perlu dibuat 2 <i>sub-interface</i> saja.</p>
-<pre>Router(config)#interface fastEthernet 0/0.10
+    <p class="sub">Penambahan <i>sub-interface</i> disesuaikan dengan banyaknya VLAN yang akan ditangani. Berhubung pada Gambar 9 hanya ada 2 VLAN, maka perlu dibuat 2 <i>sub-interface</i> saja.</p>
+    <pre>Router(config)#interface fastEthernet 0/0.10
 Router(config-subif)#encapsulation dot1Q 10
 Router(config-subif)#ip address 192.168.1.1 255.255.255.0
 Router(config-subif)#exit
@@ -212,63 +262,78 @@ Router(config-subif)#ip address 192.168.2.1 255.255.255.0
 Router(config-subif)#exit
 Router(config)#^Z</pre>
 
-  <h4>d. Cek Konfigurasi</h4>
-<pre>Router# show run
+    <h4>d. Cek Konfigurasi</h4>
+    <pre>Router# show run
 (melihat semua konfigurasi dasar di router)
 Router# show ip interface brief
 (melihat ip di masing-masing interface)
 Router# show ip route
 (melihat tabel routing)</pre>
-  <p class="sub">Melakukan tes koneksi dari PC A ke PC B dengan perintah <i>ping</i> dan <i>traceroute</i>, catat hasilnya dan bandingkan dengan perintah <i>ping</i> sebelum dilakukan <i>setting</i> pada <i>router</i>.</p>
+    <p class="sub">Melakukan tes koneksi dari PC A ke PC B dengan perintah <i>ping</i> dan <i>traceroute</i>, catat hasilnya dan bandingkan dengan perintah <i>ping</i> sebelum dilakukan <i>setting</i> pada <i>router</i>.</p>
 
-  <h3>3. Percobaan VLAN Menggunakan Mikrotik</h3>
-  <p>Salah satu produk Mikrotik yaitu RB250GS. RB250GS adalah termasuk di dalam <i>switch</i> khusus yang bisa mengimplementasikan VLAN di setiap <i>port</i>-nya sehingga membuat jaringan lebih terorganisasi dengan baik.</p>
-  <p>Pada Gambar 10 adalah bagan jaringan untuk contoh implementasi VLAN yang bisa dilakukan oleh produk <i>router</i> Mikrotik dan dipadukan dengan <i>switch</i> Mikrotik RB250GS.</p>
+    <h3>3. Percobaan VLAN Menggunakan Mikrotik</h3>
+    <p>Salah satu produk Mikrotik yaitu RB250GS. RB250GS adalah termasuk di dalam <i>switch</i> khusus yang bisa mengimplementasikan VLAN di setiap <i>port</i>-nya sehingga membuat jaringan lebih terorganisasi dengan baik.</p>
+    <p>Pada Gambar 10 adalah bagan jaringan untuk contoh implementasi VLAN yang bisa dilakukan oleh produk <i>router</i> Mikrotik dan dipadukan dengan <i>switch</i> Mikrotik RB250GS.</p>
 
-  <img src="Gambar Bagan Jaringan Mikrotik.png" alt="Gambar Bagan Jaringan Mikrotik">
-  <p class="caption">Gambar 10 - Bagan Jaringan</p>
+    <figure>
+        <img src="Gambar Bagan Jaringan Mikrotik.png" alt="Bagan Jaringan Mikrotik">
+        <figcaption>Gambar 10 - Bagan Jaringan</figcaption>
+    </figure>
 
-  <p>Jalur Internet akan masuk ke dalam <i>router</i> Mikrotik melalui <i>interface</i> Ether1 dan akan didistribusikan kembali ke jaringan lokal melalui <i>Interface</i> Ether2.</p>
-  <p>Pada Ether2 di <i>router</i> terdapat 2 VLAN yaitu VLAN2 dan VLAN3. Kedua informasi VLAN ini akan diteruskan ke <i>switch</i> RB250GS dengan menghubungkan Ether2 dari <i>router</i> ke Ether1-<i>Switch</i>.</p>
-  <p>Pada <i>switch</i> RB250GS segmen <i>network</i> 1 dan <i>network</i> 2 akan didistribusikan ke <i>interface</i> yang berbeda. Semua perangkat yang terhubung di kedua <i>port switch</i> ini harus menggunakan <i>routing</i> terlebih dahulu di <i>router</i> untuk berkomunikasi satu sama lain.</p>
+    <p>Jalur Internet akan masuk ke dalam <i>router</i> Mikrotik melalui <i>interface</i> Ether1 dan akan didistribusikan kembali ke jaringan lokal melalui <i>Interface</i> Ether2.</p>
+    <p>Pada Ether2 di <i>router</i> terdapat 2 VLAN yaitu VLAN2 dan VLAN3. Kedua informasi VLAN ini akan diteruskan ke <i>switch</i> RB250GS dengan menghubungkan Ether2 dari <i>router</i> ke Ether1-<i>Switch</i>.</p>
+    <p>Pada <i>switch</i> RB250GS segmen <i>network</i> 1 dan <i>network</i> 2 akan didistribusikan ke <i>interface</i> yang berbeda. Semua perangkat yang terhubung di kedua <i>port switch</i> ini harus menggunakan <i>routing</i> terlebih dahulu di <i>router</i> untuk berkomunikasi satu sama lain.</p>
 
-  <h4>a. Konfigurasi <i>Trunk Link</i></h4>
-  <p class="sub"><i>Trunk link</i> adalah sebuah komunikasi antara <i>Switch</i> dengan <i>Switch</i> atau antara <i>Switch</i> dengan <i>Router</i>, yang membawa informasi beberapa VLAN (VLAN ID) yang berbeda di antara kedua perangkat tersebut.</p>
+    <h4>a. Konfigurasi <i>Trunk Link</i></h4>
+    <p class="sub"><i>Trunk link</i> adalah sebuah komunikasi antara <i>Switch</i> dengan <i>Switch</i> atau antara <i>Switch</i> dengan <i>Router</i>, yang membawa informasi beberapa VLAN (VLAN ID) yang berbeda di antara kedua perangkat tersebut.</p>
 
-  <img src="Gambar Trunk Interface.png" alt="Gambar Trunk Interface">
-  <p class="caption">Gambar 11 - Trunk Interface di Router</p>
+    <figure>
+        <img src="Gambar Trunk Interface.png" alt="Trunk Interface di Router">
+        <figcaption>Gambar 11 - Trunk Interface di Router</figcaption>
+    </figure>
 
-  <img src="Gambar IP Address VLAN.png" alt="Gambar IP Address VLAN">
-  <p class="caption">Gambar 12 - IP Address pada VLAN Interface</p>
+    <figure>
+        <img src="Gambar IP Address VLAN.png" alt="IP Address pada VLAN Interface">
+        <figcaption>Gambar 12 - IP Address pada VLAN Interface</figcaption>
+    </figure>
 
-  <p class="sub">Pada Gambar 11 dan Gambar 12 adalah contoh pembuatan <i>Trunk Interface</i> di <i>router</i>. IP <i>Address</i> yang berbeda segmen sudah bisa dipasang di kedua VLAN <i>interface</i>.</p>
+    <p class="sub">Pada Gambar 11 dan Gambar 12 adalah contoh pembuatan <i>Trunk Interface</i> di <i>router</i>. IP <i>Address</i> yang berbeda segmen sudah bisa dipasang di kedua VLAN <i>interface</i>.</p>
 
-  <h4>b. RB250GS <i>Config</i></h4>
-  <p class="sub">Langkah selanjutnya adalah melakukan konfigurasi <i>Switch manageable</i> RB250GS menggunakan <i>Web browser</i> dengan <i>Username</i>=admin <i>password</i>=[kosong].</p>
-  <p class="sub">Direkomendasikan untuk langkah awal adalah mengubah IP <i>default</i> di <i>switch</i> dari 192.168.88.1 menjadi IP yang lain untuk menghindari <i>conflict</i> dengan IP <i>default router</i>. Seperti pada Gambar 13.</p>
+    <h4>b. RB250GS <i>Config</i></h4>
+    <p class="sub">Langkah selanjutnya adalah melakukan konfigurasi <i>Switch manageable</i> RB250GS menggunakan <i>Web browser</i> dengan <i>Username</i>=admin <i>password</i>=[kosong].</p>
+    <p class="sub">Direkomendasikan untuk langkah awal adalah mengubah IP <i>default</i> di <i>switch</i> dari 192.168.88.1 menjadi IP yang lain untuk menghindari <i>conflict</i> dengan IP <i>default router</i>. Seperti pada Gambar 13.</p>
 
-  <img src="Gambar Mengubah IP Default switch.png" alt="Gambar mengubah IP default switch">
-  <p class="caption">Gambar 13 - Mengubah IP Default Switch</p>
+    <figure>
+        <img src="Gambar Mengubah IP Default switch.png" alt="Mengubah IP Default Switch">
+        <figcaption>Gambar 13 - Mengubah IP Default Switch</figcaption>
+    </figure>
 
-  <h4>c. Konfigurasi VLAN <i>Table</i></h4>
-  <p class="sub">Langkah selanjutnya adalah mendaftarkan VLAN ID yang akan didistribusikan ke <i>switch</i>. Port1-<i>Switch</i> akan bertindak sebagai <i>trunk port</i> sehingga Vlan2 dan Vlan3 akan di-<i>forward</i> di <i>port</i> ini. Sedangkan Port2-<i>Switch</i> hanya mem-<i>forward</i> VLAN 2 dan Port3-<i>Switch</i> hanya mem-<i>forward</i> VLAN 3.</p>
+    <h4>c. Konfigurasi VLAN <i>Table</i></h4>
+    <p class="sub">Langkah selanjutnya adalah mendaftarkan VLAN ID yang akan didistribusikan ke <i>switch</i>. Port1-<i>Switch</i> akan bertindak sebagai <i>trunk port</i> sehingga Vlan2 dan Vlan3 akan di-<i>forward</i> di <i>port</i> ini. Sedangkan Port2-<i>Switch</i> hanya mem-<i>forward</i> VLAN 2 dan Port3-<i>Switch</i> hanya mem-<i>forward</i> VLAN 3.</p>
 
-  <img src="Gambar Vlan Table RB250GS.png" alt="Gambar Vlan Table RB250GS">
-  <p class="caption">Gambar 14 - Konfigurasi VLAN Table di RB250GS</p>
+    <figure>
+        <img src="Gambar Vlan Table RB250GS.png" alt="Konfigurasi VLAN Table di RB250GS">
+        <figcaption>Gambar 14 - Konfigurasi VLAN Table di RB250GS</figcaption>
+    </figure>
 
-  <p class="sub">Pada <i>switch manageable</i> dikenal adanya <i>Ingress Filtering</i> dan <i>Egress Filtering</i> untuk mengatur bagaimana <i>switch</i> memperlakukan <i>traffic</i> yang datang dan meninggalkan <i>port</i> tersebut.</p>
+    <p class="sub">Pada <i>switch manageable</i> dikenal adanya <i>Ingress Filtering</i> dan <i>Egress Filtering</i> untuk mengatur bagaimana <i>switch</i> memperlakukan <i>traffic</i> yang datang dan meninggalkan <i>port</i> tersebut.</p>
 
-  <img src="Gambar Ingress Egress.png" alt="Gambar Ingress Egress">
-  <p class="caption">Gambar 15 - Konfigurasi Ingress dan Egress</p>
+    <figure>
+        <img src="Gambar Ingress Egress.png" alt="Konfigurasi Ingress dan Egress">
+        <figcaption>Gambar 15 - Konfigurasi Ingress dan Egress</figcaption>
+    </figure>
 
-  <p class="sub">Pada Gambar 15, Port1-<i>Switch</i> bertindak sebagai <i>Trunk</i> menggunakan <i>policy "add if missing"</i>, sedangkan Port2 dan Port3-<i>Switch</i> bertindak sebagai <i>Access port</i> menggunakan <i>policy "always strip"</i>.</p>
+    <p class="sub">Pada Gambar 15, Port1-<i>Switch</i> bertindak sebagai <i>Trunk</i> menggunakan <i>policy "add if missing"</i>, sedangkan Port2 dan Port3-<i>Switch</i> bertindak sebagai <i>Access port</i> menggunakan <i>policy "always strip"</i>.</p>
 
-  <p class="noindent">Cara kerjanya adalah sebagai berikut:</p>
-  <ul>
-    <li><i>Traffic</i> yang datang dari Port1-<i>Switch</i> memiliki VLAN <i>header</i> dan VLAN ID yang diterima adalah VLAN dengan ID 2 dan 3 sesuai VLAN <i>table</i>.</li>
-    <li>Ketika ada <i>traffic</i> dari <i>Router</i> dengan VLAN ID=2 maka akan diteruskan ke Port2-<i>Switch</i>. Pada saat <i>traffic</i> meninggalkan Port2-<i>Switch</i>, VLAN <i>header</i> akan dihilangkan (<i>egress policy "always strip"</i>).</li>
-    <li><i>Traffic</i> balik dari Port2-<i>Switch</i> menuju <i>router</i> akan di-<i>forward</i> ke Port1-<i>Switch</i> dan ditambahkan VLAN <i>header</i> sesuai <i>default</i> VLAN ID (<i>egress port policy add if missing</i>).</li>
-  </ul>
+    <p class="noindent">Cara kerjanya adalah sebagai berikut:</p>
+    <ul>
+        <li><i>Traffic</i> yang datang dari Port1-<i>Switch</i> memiliki VLAN <i>header</i> dan VLAN ID yang diterima adalah VLAN dengan ID 2 dan 3 sesuai VLAN <i>table</i>.</li>
+        <li>Ketika ada <i>traffic</i> dari <i>Router</i> dengan VLAN ID=2 maka akan diteruskan ke Port2-<i>Switch</i>. Pada saat <i>traffic</i> meninggalkan Port2-<i>Switch</i>, VLAN <i>header</i> akan dihilangkan (<i>egress policy "always strip"</i>).</li>
+        <li><i>Traffic</i> balik dari Port2-<i>Switch</i> menuju <i>router</i> akan di-<i>forward</i> ke Port1-<i>Switch</i> dan ditambahkan VLAN <i>header</i> sesuai <i>default</i> VLAN ID (<i>egress port policy add if missing</i>).</li>
+    </ul>
 
+    <hr>
+    <p style="font-size: 0.8rem; text-align: center; color: #2c6b84;">Dokumen konfigurasi VLAN - semua teks dan gambar dipertahankan.</p>
+</div>
 </body>
 </html>
