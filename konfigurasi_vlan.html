@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   
+  
   <style>
     * {
       box-sizing: border-box;
@@ -13,18 +14,36 @@
       width: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden; /* Mencegah scroll ke kanan */
+      overflow-x: hidden;
     }
     body {
       font-family: "Times New Roman", Times, serif;
-      font-size: 12pt;
+      font-size: 11pt; /* Diubah menjadi 11pt */
       padding: 15px;
       line-height: 1.6;
       color: #000;
       background-color: #fff;
     }
-    h2, h3, h4 {
+    h2 {
+      font-size: 12pt;
       font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+    h3 {
+      font-size: 11pt;
+      font-weight: bold;
+      margin-top: 16px;
+      margin-bottom: 4px;
+      text-align: left;
+    }
+    h4 {
+      font-size: 11pt;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 4px;
+      margin-left: 16px;
       text-align: left;
     }
     p {
@@ -36,13 +55,13 @@
     img {
       display: block;
       margin: 20px auto;
-      max-width: 100% !important; /* Memaksa gambar tidak melebihi lebar layar */
-      height: auto !important;    /* Menjaga proporsi */
+      max-width: 100% !important;
+      height: auto !important;
       border: 1px solid #ddd;
     }
     .caption {
       text-align: center;
-      font-size: 11pt;
+      font-size: 10pt; /* Diperkecil sedikit untuk caption */
       font-style: italic;
       text-indent: 0;
       margin-top: -10px;
@@ -51,15 +70,16 @@
       background-color: #f8f9fa;
       padding: 12px;
       border: 1px solid #ddd;
-      font-family: monospace;
-      font-size: 10pt;
-      white-space: pre-wrap;       /* Teks kode akan turun ke bawah jika panjang */
+      font-family: "Courier New", Courier, monospace;
+      font-size: 9pt; /* Font kode diperkecil */
+      white-space: pre-wrap;
       word-break: break-all;
       overflow-x: auto;
     }
     .sub { margin-left: 20px; }
     .noindent { text-indent: 0; }
   </style>
+
 
 </head>
 <body>
