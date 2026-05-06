@@ -122,7 +122,7 @@
 
     <h3>1. Percobaan VLAN dengan <i>Switch</i> Cisco Catalyst</h3>
     <p>Langkah-langkah untuk mengkonfigurasi VLAN pada <i>Switch</i> Cisco Catalyst antara lain:</p>
-    <p>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i> dan selanjutnya memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. Untuk mengaktifkan <i>Switch</i> menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i>.</p>
+    <p>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i> dan selanjutnya memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. <strong>Tujuan utama konfigurasi VLAN adalah membagi jaringan secara logis tanpa mengubah infrastruktur fisik</strong>. Untuk mengaktifkan <i>Switch</i> menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i>.</p>
 
     <figure>
         <img src="Gambar CLI Switch.png" alt="Tampilan CLI Switch">
@@ -165,7 +165,7 @@ Switch(config)#</pre>
     </figure>
 
     <h4>b. Memasukkan <i>Port</i> menjadi Anggota Suatu VLAN</h4>
-    <p class="sub">Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
+    <p class="sub"><strong>Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1</strong>. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
     <p class="noindent">1. Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface fastEthernet 0/1
 Switch(config-if)#switchport mode access
@@ -177,7 +177,7 @@ Switch(config-if)#exit</pre>
         <figcaption>Gambar 5 - Memasukkan fastethernet 0/1 menjadi anggota VLAN 3</figcaption>
     </figure>
 
-    <p class="sub">Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i>.</p>
+    <p class="sub"><strong>Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i></strong> untuk efisiensi konfigurasi.</p>
     <p class="noindent">2. Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface range fa0/1 - fa0/10
 Switch(config-if-range)#switchport mode access
@@ -189,7 +189,7 @@ Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 2</pre>
 
     <h4>c. Melihat Hasil VLAN</h4>
-    <p class="noindent">Dengan <i>show</i> VLAN:</p>
+    <p class="noindent"><strong>Untuk memverifikasi konfigurasi VLAN, dapat menggunakan perintah <i>show vlan</i> atau <i>show vlan brief</i></strong>.</p>
     <pre>Switch:#show vlan</pre>
 
     <figure>
@@ -206,7 +206,7 @@ Switch(config-if-range)#switchport access vlan 2</pre>
     </figure>
 
     <h4>d. Menghapus VLAN</h4>
-    <p class="sub">Jika akan menghapus sebuah VLAN, dapat menggunakan perintah <i>"no vlan IdVlan"</i>. Sebagai contoh, perintah untuk menghapus VLAN 2:</p>
+    <p class="sub"><strong>Jika akan menghapus sebuah VLAN, dapat menggunakan perintah <i>"no vlan IdVlan"</i></strong>. Sebagai contoh, perintah untuk menghapus VLAN 2:</p>
     <pre>Switch#configure terminal
 Switch(config)#no vlan 2</pre>
     <p class="sub">Maka saat dilihat dengan <i>show vlan brief</i>, VLAN 2 tidak ada pada tampilan seperti pada Gambar 8.</p>
@@ -217,7 +217,7 @@ Switch(config)#no vlan 2</pre>
     </figure>
 
     <h3>2. Percobaan VLAN dengan <i>Switch</i> dan <i>Router</i> Cisco Catalyst</h3>
-    <p>Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 9.</p>
+    <p><strong>Tujuan dari konfigurasi ini adalah menghubungkan antar VLAN yang berbeda menggunakan router (inter-VLAN routing)</strong>. Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 9.</p>
 
     <figure>
         <img src="Gambar VLAN dengan Router.png" alt="VLAN dengan Router">
@@ -234,6 +234,7 @@ Switch(config)#no vlan 2</pre>
     <p class="sub">Melakukan tes koneksi antara PC A dan PC B, catat hasilnya.</p>
 
     <h4>b. Menambahkan <i>Setting</i> di <i>Switch</i> untuk Kabel yang Terhubung ke <i>Router</i> (<i>Trunk</i>)</h4>
+    <p class="sub"><strong>Port yang menghubungkan switch ke router harus dikonfigurasi sebagai <i>trunk</i> agar dapat membawa beberapa VLAN sekaligus</strong>.</p>
     <pre>Switch#conf t
 Switch(config)#interface fastEthernet 0/4
 Switch(config-if)#switchport mode trunk
@@ -250,7 +251,7 @@ Router(config)#interface fastEthernet 0/0
 Router(config-if)#no shutdown
 Router(config-if)#exit</pre>
 
-    <p class="sub">Penambahan <i>sub-interface</i> disesuaikan dengan banyaknya VLAN yang akan ditangani. Berhubung pada Gambar 9 hanya ada 2 VLAN, maka perlu dibuat 2 <i>sub-interface</i> saja.</p>
+    <p class="sub"><strong>Penambahan <i>sub-interface</i> disesuaikan dengan banyaknya VLAN yang akan ditangani</strong>. Berhubung pada Gambar 9 hanya ada 2 VLAN, maka perlu dibuat 2 <i>sub-interface</i> saja.</p>
     <pre>Router(config)#interface fastEthernet 0/0.10
 Router(config-subif)#encapsulation dot1Q 10
 Router(config-subif)#ip address 192.168.1.1 255.255.255.0
@@ -269,10 +270,10 @@ Router# show ip interface brief
 (melihat ip di masing-masing interface)
 Router# show ip route
 (melihat tabel routing)</pre>
-    <p class="sub">Melakukan tes koneksi dari PC A ke PC B dengan perintah <i>ping</i> dan <i>traceroute</i>, catat hasilnya dan bandingkan dengan perintah <i>ping</i> sebelum dilakukan <i>setting</i> pada <i>router</i>.</p>
+    <p class="sub"><strong>Melakukan tes koneksi dari PC A ke PC B dengan perintah <i>ping</i> dan <i>traceroute</i></strong>, catat hasilnya dan bandingkan dengan perintah <i>ping</i> sebelum dilakukan <i>setting</i> pada <i>router</i>.</p>
 
     <h3>3. Percobaan VLAN Menggunakan Mikrotik</h3>
-    <p>Salah satu produk Mikrotik yaitu RB250GS. RB250GS adalah termasuk di dalam <i>switch</i> khusus yang bisa mengimplementasikan VLAN di setiap <i>port</i>-nya sehingga membuat jaringan lebih terorganisasi dengan baik.</p>
+    <p>Salah satu produk Mikrotik yaitu RB250GS. <strong>RB250GS adalah termasuk di dalam <i>switch</i> khusus yang bisa mengimplementasikan VLAN di setiap <i>port</i>-nya sehingga membuat jaringan lebih terorganisasi dengan baik</strong>.</p>
     <p>Pada Gambar 10 adalah bagan jaringan untuk contoh implementasi VLAN yang bisa dilakukan oleh produk <i>router</i> Mikrotik dan dipadukan dengan <i>switch</i> Mikrotik RB250GS.</p>
 
     <figure>
@@ -281,11 +282,11 @@ Router# show ip route
     </figure>
 
     <p>Jalur Internet akan masuk ke dalam <i>router</i> Mikrotik melalui <i>interface</i> Ether1 dan akan didistribusikan kembali ke jaringan lokal melalui <i>Interface</i> Ether2.</p>
-    <p>Pada Ether2 di <i>router</i> terdapat 2 VLAN yaitu VLAN2 dan VLAN3. Kedua informasi VLAN ini akan diteruskan ke <i>switch</i> RB250GS dengan menghubungkan Ether2 dari <i>router</i> ke Ether1-<i>Switch</i>.</p>
-    <p>Pada <i>switch</i> RB250GS segmen <i>network</i> 1 dan <i>network</i> 2 akan didistribusikan ke <i>interface</i> yang berbeda. Semua perangkat yang terhubung di kedua <i>port switch</i> ini harus menggunakan <i>routing</i> terlebih dahulu di <i>router</i> untuk berkomunikasi satu sama lain.</p>
+    <p>Pada Ether2 di <i>router</i> terdapat 2 VLAN yaitu VLAN2 dan VLAN3. <strong>Kedua informasi VLAN ini akan diteruskan ke <i>switch</i> RB250GS dengan menghubungkan Ether2 dari <i>router</i> ke Ether1-<i>Switch</i></strong>.</p>
+    <p>Pada <i>switch</i> RB250GS segmen <i>network</i> 1 dan <i>network</i> 2 akan didistribusikan ke <i>interface</i> yang berbeda. <strong>Semua perangkat yang terhubung di kedua <i>port switch</i> ini harus menggunakan <i>routing</i> terlebih dahulu di <i>router</i> untuk berkomunikasi satu sama lain</strong>.</p>
 
     <h4>a. Konfigurasi <i>Trunk Link</i></h4>
-    <p class="sub"><i>Trunk link</i> adalah sebuah komunikasi antara <i>Switch</i> dengan <i>Switch</i> atau antara <i>Switch</i> dengan <i>Router</i>, yang membawa informasi beberapa VLAN (VLAN ID) yang berbeda di antara kedua perangkat tersebut.</p>
+    <p class="sub"><strong><i>Trunk link</i> adalah sebuah komunikasi antara <i>Switch</i> dengan <i>Switch</i> atau antara <i>Switch</i> dengan <i>Router</i>, yang membawa informasi beberapa VLAN (VLAN ID) yang berbeda di antara kedua perangkat tersebut</strong>.</p>
 
     <figure>
         <img src="Gambar Trunk Interface.png" alt="Trunk Interface di Router">
@@ -301,7 +302,7 @@ Router# show ip route
 
     <h4>b. RB250GS <i>Config</i></h4>
     <p class="sub">Langkah selanjutnya adalah melakukan konfigurasi <i>Switch manageable</i> RB250GS menggunakan <i>Web browser</i> dengan <i>Username</i>=admin <i>password</i>=[kosong].</p>
-    <p class="sub">Direkomendasikan untuk langkah awal adalah mengubah IP <i>default</i> di <i>switch</i> dari 192.168.88.1 menjadi IP yang lain untuk menghindari <i>conflict</i> dengan IP <i>default router</i>. Seperti pada Gambar 13.</p>
+    <p class="sub"><strong>Direkomendasikan untuk langkah awal adalah mengubah IP <i>default</i> di <i>switch</i> dari 192.168.88.1 menjadi IP yang lain untuk menghindari <i>conflict</i> dengan IP <i>default router</i></strong>. Seperti pada Gambar 13.</p>
 
     <figure>
         <img src="Gambar Mengubah IP Default switch.png" alt="Mengubah IP Default Switch">
@@ -309,14 +310,14 @@ Router# show ip route
     </figure>
 
     <h4>c. Konfigurasi VLAN <i>Table</i></h4>
-    <p class="sub">Langkah selanjutnya adalah mendaftarkan VLAN ID yang akan didistribusikan ke <i>switch</i>. Port1-<i>Switch</i> akan bertindak sebagai <i>trunk port</i> sehingga Vlan2 dan Vlan3 akan di-<i>forward</i> di <i>port</i> ini. Sedangkan Port2-<i>Switch</i> hanya mem-<i>forward</i> VLAN 2 dan Port3-<i>Switch</i> hanya mem-<i>forward</i> VLAN 3.</p>
+    <p class="sub">Langkah selanjutnya adalah mendaftarkan VLAN ID yang akan didistribusikan ke <i>switch</i>. <strong>Port1-<i>Switch</i> akan bertindak sebagai <i>trunk port</i> sehingga Vlan2 dan Vlan3 akan di-<i>forward</i> di <i>port</i> ini. Sedangkan Port2-<i>Switch</i> hanya mem-<i>forward</i> VLAN 2 dan Port3-<i>Switch</i> hanya mem-<i>forward</i> VLAN 3</strong>.</p>
 
     <figure>
         <img src="Gambar Vlan Table RB250GS.png" alt="Konfigurasi VLAN Table di RB250GS">
         <figcaption>Gambar 14 - Konfigurasi VLAN Table di RB250GS</figcaption>
     </figure>
 
-    <p class="sub">Pada <i>switch manageable</i> dikenal adanya <i>Ingress Filtering</i> dan <i>Egress Filtering</i> untuk mengatur bagaimana <i>switch</i> memperlakukan <i>traffic</i> yang datang dan meninggalkan <i>port</i> tersebut.</p>
+    <p class="sub"><strong>Pada <i>switch manageable</i> dikenal adanya <i>Ingress Filtering</i> dan <i>Egress Filtering</i> untuk mengatur bagaimana <i>switch</i> memperlakukan <i>traffic</i> yang datang dan meninggalkan <i>port</i> tersebut</strong>.</p>
 
     <figure>
         <img src="Gambar Ingress Egress.png" alt="Konfigurasi Ingress dan Egress">
@@ -325,7 +326,7 @@ Router# show ip route
 
     <p class="sub">Pada Gambar 15, Port1-<i>Switch</i> bertindak sebagai <i>Trunk</i> menggunakan <i>policy "add if missing"</i>, sedangkan Port2 dan Port3-<i>Switch</i> bertindak sebagai <i>Access port</i> menggunakan <i>policy "always strip"</i>.</p>
 
-    <p class="noindent">Cara kerjanya adalah sebagai berikut:</p>
+    <p class="noindent"><strong>Cara kerjanya adalah sebagai berikut:</strong></p>
     <ul>
         <li><i>Traffic</i> yang datang dari Port1-<i>Switch</i> memiliki VLAN <i>header</i> dan VLAN ID yang diterima adalah VLAN dengan ID 2 dan 3 sesuai VLAN <i>table</i>.</li>
         <li>Ketika ada <i>traffic</i> dari <i>Router</i> dengan VLAN ID=2 maka akan diteruskan ke Port2-<i>Switch</i>. Pada saat <i>traffic</i> meninggalkan Port2-<i>Switch</i>, VLAN <i>header</i> akan dihilangkan (<i>egress policy "always strip"</i>).</li>
