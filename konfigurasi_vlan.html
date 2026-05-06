@@ -166,7 +166,7 @@ Switch(config)#</pre>
 
     <h4>b. Memasukkan <i>Port</i> menjadi Anggota Suatu VLAN</h4>
     <p class="sub">Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
-    <p class="noindent">Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
+    <p class="noindent">1. Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface fastEthernet 0/1
 Switch(config-if)#switchport mode access
 Switch(config-if)#switchport access vlan 10
@@ -178,12 +178,12 @@ Switch(config-if)#exit</pre>
     </figure>
 
     <p class="sub">Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i>.</p>
-    <p class="noindent">Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
+    <p class="noindent">2. Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface range fa0/1 - fa0/10
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 3</pre>
 
-    <p class="noindent">Memasukkan <i>port</i> Fa0/11 sampai Fa0/20 menjadi anggota VLAN 2:</p>
+    <p class="noindent">3. Memasukkan <i>port</i> Fa0/11 sampai Fa0/20 menjadi anggota VLAN 2:</p>
     <pre>Switch(config)#interface range fa0/11 - fa0/20
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 2</pre>
