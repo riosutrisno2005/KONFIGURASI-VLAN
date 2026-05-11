@@ -119,24 +119,28 @@
 <div class="container">
     <h2>Konfigurasi VLAN</h2>
 
-    <h3>1. Percobaan VLAN dengan <i>Switch</i> Cisco Catalyst</h3>
+    <h3>A. Percobaan VLAN dengan <i>Switch</i> Cisco Catalyst</h3>
     <p>Langkah-langkah untuk mengkonfigurasi VLAN pada <i>Switch</i> Cisco Catalyst antara lain:</p>
-    <p>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i> dan selanjutnya memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. <strong>Tujuan utama konfigurasi VLAN adalah membagi jaringan secara logis tanpa mengubah infrastruktur fisik</strong>. Untuk mengaktifkan <i>Switch</i> menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i>.</p>
+    <ol>
+        <li>Masuk menu <i>switch</i> dengan mengklik <i>double switch</i></li>
+        <li>Memilih sub menu CLI, contoh tampilan seperti pada Gambar 1. </li>
+        <li>Mengaktifkan <i>Switch</i>, yaitu menekan <i>enter</i> kemudian dilakukan dengan mengetikkan <i>enable</i></li>
+    </ol>
 
     <figure>
         <img src="Gambar CLI Switch.png" alt="Tampilan CLI Switch">
-        <figcaption>Gambar 1 - Tampilan CLI Switch</figcaption>
+        <figcaption>Gambar 1 - Tampilan <i>CLI Switch</i></figcaption>
     </figure>
 
     <h4>a. Membuat VLAN</h4>
-    <p class="sub">Sebagai contoh percobaan membangun <i>Virtual LAN</i> seperti pada Gambar 2.</p>
+    <p class="sub">Sebagai contoh percobaan membangun <i>virtual LAN</i> seperti pada Gambar 2.</p>
 
     <figure>
         <img src="Gambar Topologi VLAN.png" alt="Topologi VLAN">
         <figcaption>Gambar 2 - Topologi VLAN</figcaption>
     </figure>
 
-    <p class="noindent">Perintah yang digunakan untuk membuat VLAN antara lain:</p>
+    <p class="noindent">Perintah yang digunakan untuk membuat VLAN yaitu:</p>
     <pre>Switch>enable
 Switch#configure terminal
 (untuk masuk ke sub menu konfigurasi)
@@ -155,17 +159,17 @@ Switch(config)#</pre>
 
     <figure>
         <img src="Gambar membuat VLAN 3.png" alt="Membuat VLAN 3">
-        <figcaption>Gambar 3 - Percobaan membuat VLAN 3 dengan nama KANTOR</figcaption>
+        <figcaption>Gambar 3 - Percobaan Membuat VLAN 3 dengan Nama Kantor</figcaption>
     </figure>
 
     <figure>
         <img src="Gambar membuat VLAN 2.png" alt="Membuat VLAN 2">
-        <figcaption>Gambar 4 - Percobaan membuat VLAN 2 dengan nama MAHASISWA</figcaption>
+        <figcaption>Gambar 4 - Percobaan Membuat VLAN 2 dengan nama Mahasiswa</figcaption>
     </figure>
 
     <h4>b. Memasukkan <i>Port</i> menjadi Anggota Suatu VLAN</h4>
-    <p class="sub"><strong>Secara <i>default</i> semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1</strong>. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
-    <p class="noindent">1. Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
+    <p class="sub"><strong>Secara <i>default</i>, semua <i>port</i> dalam <i>switch</i> menjadi anggota VLAN 1</strong>. Untuk memasukkan <i>port</i> menjadi anggota suatu VLAN, maka dilakukan konfigurasi masing-masing <i>interface</i> ke spesifik VLAN.</p>
+    <p class="sub">Memasukkan <i>port fastethernet</i> 0/1 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface fastEthernet 0/1
 Switch(config-if)#switchport mode access
 Switch(config-if)#switchport access vlan 10
@@ -173,16 +177,16 @@ Switch(config-if)#exit</pre>
 
     <figure>
         <img src="Gambar memasukan Port ke VLAN.png" alt="Memasukkan port ke VLAN">
-        <figcaption>Gambar 5 - Memasukkan fastethernet 0/1 menjadi anggota VLAN 3</figcaption>
+        <figcaption>Gambar 5 - Memasukkan Fastethernet 0/1 menjadi anggota VLAN 3</figcaption>
     </figure>
 
-    <p class="sub"><strong>Jika akan memasukkan beberapa <i>port</i> bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i></strong> untuk efisiensi konfigurasi.</p>
-    <p class="noindent">2. Memasukkan <i>port</i> Fa0/1 sampai Fa0/10 menjadi anggota VLAN 3:</p>
+    <p class="sub"><strong>Jika ingin memasukkan beberapa <i>port</i> secara bersama-sama menjadi anggota sebuah VLAN, dapat menggunakan <i>interface range</i></strong> untuk efisiensi konfigurasi.</p>
+    <p class="sub">Memasukkan <i>port</i> Fa0/1 hingga Fa0/10 menjadi anggota VLAN 3:</p>
     <pre>Switch(config)#interface range fa0/1 - fa0/10
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 3</pre>
 
-    <p class="noindent">3. Memasukkan <i>port</i> Fa0/11 sampai Fa0/20 menjadi anggota VLAN 2:</p>
+    <p class="sub">Memasukkan <i>port</i> Fa0/11 hingga Fa0/20 menjadi anggota VLAN 2:</p>
     <pre>Switch(config)#interface range fa0/11 - fa0/20
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport access vlan 2</pre>
